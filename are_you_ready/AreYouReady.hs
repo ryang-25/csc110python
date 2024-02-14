@@ -10,7 +10,12 @@
 
 -- [input prompt] outputs the prompt to stdout and reads an integer from stdin.
 input :: String -> IO Int
-input prompt = read <$> (putStrLn prompt >> getLine)
+input prompt = do
+  putStr prompt
+  putStr " "
+  ret <- getLine
+  putStrLn ret
+  return $ read ret
 
 -- [input_10 prompt] validates the input
 input_10 = (validate <$>) . input 
