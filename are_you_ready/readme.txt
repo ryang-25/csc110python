@@ -6,8 +6,8 @@ COURSE TITLE: CSC I: PythonForSci-E
 MEETING TIME(S): 3 PM T,Th,F
 DESCRIPTION: 
 HONOR CODE: On my honor, I have neither given nor received unauthorized help on this assignment.
-HOWTO: ghc AreYouReady.hs python3 areyouready.py OR python3 are_you_ready.py
-INPUT FILE: AreYouReady.hs areyouready.py are_you_ready.py
+HOWTO: ghc AreYouReady.hs python3 areyouready.py OR python3 prepared.py
+INPUT FILE: AreYouReady.hs areyouready.py prepared.py
 OUTPUT FILE: AreYouReady
 BIBLIOGRAPHY: N/A
 RESOURCES: N/A
