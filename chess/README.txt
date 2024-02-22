@@ -1,13 +1,13 @@
-TITLE: Are You Ready?
+TITLE: The Chess Problem: Using an Accumulator
 AUTHOR/PROGRAMMER: Roland Yang
-DATE DUE: 2/23/24
+DATE DUE: 2/27/24
 DATE SUBMITTED: 2/14/24
 COURSE TITLE: CSC I: PythonForSci-E
 MEETING TIME(S): 3 PM T,Th,F
 DESCRIPTION: 
 HONOR CODE: On my honor, I have neither given nor received unauthorized help on this assignment.
-HOWTO: python3 prepared.py
-INPUT FILE: prepared.py
+HOWTO: python3 chess.py
+INPUT FILE: chess.py
 OUTPUT FILE: N/A
 BIBLIOGRAPHY: N/A
 RESOURCES: N/A

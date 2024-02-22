@@ -1,11 +1,13 @@
 # initialize
 
 def int_input(prompt):
+  """Input a prompt and cast it to integer"""
   out = int(input(prompt)) # cast to integer
   print(out)
   return out
 
 def restrict_int_input(prompt):
+  """Input but restrict the output."""
   num = int_input(prompt)
   if 0 < num > 10: # restrict the allowed values
     raise ValueError("value should be between 0 and 10!")
@@ -17,7 +19,7 @@ def main():
   sleep = int_input("Please enter the Hours of sleep you had last night:")
   shots = int_input("Please enter the number of Shots of expresso or other stimulants consumed:")
   excel = int_input("Please enter the number of Hours needed to excel:")
-  if excel <= 0: # prevent divide by zero by restricting excel to be nonzero.
+  if excel <= 0: # prevent divide by zero by restricting excel to be nonzero. bonus.
     raise ValueError("Excelling hours should be positive!!") 
   prepare = int_input("Please enter the number of Hours you actually spent preparing:")
   difficulty = restrict_int_input("Please enter the Difficulty of the subject matter (from 1 to 10):")
