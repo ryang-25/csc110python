@@ -27,7 +27,7 @@ input_10 = (validate <$>) . input
 
 main = do
   -- input
-  importance <- input_10 "Please enter the Importance of the event (from 1 to 10):"
+  importance <- input_10 "Enter the importance of the event (1 - 10 with 10 being \"singing the national anthem at the Super Bowl\"): "
   sleep <- input "Please enter the Hours of sleep you had last night:"
   shots <- input "Please enter the number of Shots of expresso or other stimulants consumed:"
   -- excel hours must be nonzero for the calculation.
