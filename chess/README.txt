@@ -5,16 +5,27 @@ DATE SUBMITTED: 2/14/24
 COURSE TITLE: CSC I: PythonForSci-E
 MEETING TIME(S): 3 PM T,Th,F
 DESCRIPTION: 
-HONOR CODE: On my honor, I have neither given nor received unauthorized help on this assignment.
+HONOR CODE: On my honor, I have neither given nor received unauthorized help on
+this assignment.
 HOWTO: python3 chess.py
 INPUT FILE: chess.py
 OUTPUT FILE: N/A
 BIBLIOGRAPHY: N/A
 RESOURCES: N/A
 TUTORS: N/A
-COMMENTS: Invalid input raises an exception. I also completed the bonus parts.
-REFLECTION: It took me roughly a class period to complete the assignment. I was
-bored so I did the assignment in both python and haskell. The project is
-straightforward by reading input from standard input and converting it to an
-integer. By artificially constraining the inputs to make the hours needed to
-excel nonzero I am able to avoid divide-by-zero.
+
+COMMENTS:
+  1. Which countries produce the greatest amount of rice per year (in metric
+     tonnes)?
+  2. Can China produce the required amount of rice in a year? If not, how many
+     years would it take?
+  3. Can Japan produce the required amount of rice in a year? If not, how many
+     years would it take?
+  4. Can India produce the required amount of rice in a year? If not, how many
+     years would it take?
+  5. Can the US produce the required amount of rice in a year? If not, how many
+     years would it take?
+  6. Can the combined output of China, Japan, India, and the US produce the
+     required amount of rice requested in a year?
+
+REFLECTION: Unit conversion is the most challenging part of the whole assignment.
