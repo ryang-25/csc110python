@@ -1,3 +1,9 @@
+## Project title: Are You Ready?
+## Roland Yang
+## 2/26/24
+## On my honor, I have neither given nor received unauthorized help on this
+## assignment
+
 # initialize
 
 def int_input(prompt):
