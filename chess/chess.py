@@ -9,55 +9,55 @@ def print_in(prompt):
     """ Accept input and print out the input to the terminal with a newline. """
     ret = input(prompt)
     print(ret)
-    return int(ret)
+    return float(ret)
 
-
-def sum(numbers):
-  """ Sum a list. """
+def sum_squares(n):
+  """ Calculate a power of two by accumulator. """
   acc = 0
-  for n in numbers:
-    acc += n
+  for i in range(0, n):
+    acc += 2**i
   return acc
 
 def main():
+  print("THE CHESSBOARD PROBLEM")
+
+  # input
+  squares = int(print_in("What is the number of squares on the gameboard?"))
+  volume = print_in("What is the volume of a single grain of rice (in cubic mm)?")
+  mass = print_in("What is the mass of a single grain of rice (in mg)?")
+  packing = print_in("What is the fraction of air gaps (%age of voids)?")
+  area = print_in("What is the total surface area of South Carolina (in square miles)?")
+
   # process
+  rice = sum_squares(squares)
+  # Convert from mm (10^-3) to meters by multiplying by (10^-3)^3. Round to 2 digits.
+  rice_volume = round(rice * volume * 1e-9, 2)
+  total_volume = round(rice_volume / (1 - packing), 2)
 
-  squares = print_in("What is the number of squares on the gameboard?")
-  rice_squares = [2**n for n in range(0, squares)]
-  total_rice = sum(rice_squares)
+  # Conversions to feet.
+  # meters cubed to feet cubed.
+  rice_volume *= 35.315
+  total_volume *= 35.315
 
-  grain_volume = 21.13e-3
-  # Convert to m^3.
-  grain_volume = print_in("What is the volume of a single grain of rice (in cubic mm)?") * 1e-9
-  rice_volume = grain_volume * total_rice
+  # Convert the area to square feet.
+  area *= 27878400
 
-  # Volume of the whole. Divide by the packing fraction to find the total volume.
-  packing_faction = print_in("what is the packing fraction?")
-  total_volume = rice_volume / packing_faction
+  # divide by area.
+  rice_depth = rice_volume / area
+  total_depth = total_volume / area
 
-  # www2.census.gov/library/publications/decennial/2010/cph-2/cph-2-1.pdf
-  # The total surface area of South Carolina, in square miles.
-  # We convert to metric for easier maths, so m^2
-  surface_area = print_in("What is the total surface area of South Carolina (in square miles)?") * 2.59e6
 
-  # Depth in ft.
-  depth = total_volume * 3.28 / surface_area
 
-  # www.statista.com/statistics/255945/top-countries-of-destination-for-us-rice-exports-2011/
-  # China produces 145.95 million metric tons of rice per year.
-  year_metric_tons = 145.95e6
 
-  # Mass of 1000 kernels in grams.
-  thousand_kernel_weight = 24.37
-
-  # Mass of the rice we would need to produce, in kilograms.
-  # Convert to metric tons by multiplying by 1000.
-  rice_weight = total_rice*thousand_kernel_weight*1000
 
   # Output
-  print(f"The total number of grains of rice for a gameboard of {squares} many squares is {total_rice}.")
-  print(f"The total volume of rice is {total_volume} cubic meters.")
-  print(f"The total depth of rice over the state of South Carolina is {depth} feet.")
-  print(f"The total number of metric tonnes requested is {rice_weight} tonnes.")
+  print()
+  print("RESULTS")
+  print(f"The total number of grains of rice for a gameboard of {squares} squares is {rice} grains.")
+  print(f"The total volume of rice is {rice_volume} cubic meters (compacted)")
+  print(f"The total volume of rice is {total_volume} cubic meters (with air gaps).")
+  print(f"The total depth of rice over the state of South Carolina is {rice_depth} feet (compacted)")
+  print(f"The total depth of rice over the state of South Carolina is {total_depth} feet (with air gaps)")
+  print(f"The total number of metric tons (mtu) requested is {area} tonnes.")
 
 main()

@@ -44,10 +44,12 @@ def main():
   print("If your level of Preparedness is greater than 1, you will be just fine.")
   output = numberator / denominator
   print("Your level Preparedness is ", output)
+  """
   if output > 1: # bonus
     print("GO IN CONFIDENCE")
   else:
     print("YOU NEED MORE PREPARATION")
+  """
 
 # terminate
 
