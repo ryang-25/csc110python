@@ -1,0 +1,13 @@
+{
+    "manifest_version": 3,
+    "name": "Runestone",
+    "version": "0.0.1",
+    "description": "a extension to click all the things",
+    "content_scripts": [{
+        "matches": ["https://runestone.academy/assignment/student/doAssignment"],
+        "js": ["content.js"]
+    }],
+    "permissions": [
+        "tabs"
+    ]
+}

@@ -1,29 +1,15 @@
-function sendLinks() {
-	const incomplete = document.querySelectorAll(".started, .notstarted");
-	const links = [...incomplete].map(n => n.firstChild.href);
-	chrome.runtime.sendMessage(links);
+// open as little tabs as possible.
+
+async function openAndMark(urls) {
+	const props = urls.map(u => { active: false, url });
+	let tab = await chrome.tabs.create(prop);
+	for prop in props {
+		const resp = await chrome.tabs.sendMessage(tab.id, null);
+		if (resp === true)
+			tab = chrome.tabs.create(prop);
+	}
 }
 
-function openAndMark(url) {
-	const properties = {
-		active: false,
-		url
-	};
-	const tab = await chrome.tabs.create(properties);
-
-}
-
-
-function markDone() {
-	document.getElementById("completionButton").click();
-}
-
-
-window.addEventListener("DOMContentLoaded", () => {
-
+runtime.onMessage.addEventListener((urls) => {
+	openAndMark(urls).then(());
 });
-
-
-runtime.onMessage("click", () => {
-	
-}) 
