@@ -1,4 +1,8 @@
 .DS_Store
 
+# Haskell
 *.hi
 *.o
+
+# pycache
+__pycache__/

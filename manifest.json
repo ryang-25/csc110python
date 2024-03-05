@@ -3,8 +3,11 @@
     "name": "Runestone",
     "version": "0.0.1",
     "description": "a extension to click all the things",
+    "background": {
+        "service_worker": "runestone.js"
+    },
     "content_scripts": [{
-        "matches": ["https://runestone.academy/assignment/student/doAssignment"],
+        "matches": ["https://runestone.academy/assignment/student/doAssignment*"],
         "js": ["content.js"]
     }],
     "permissions": [

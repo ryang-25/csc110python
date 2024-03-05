@@ -2,14 +2,16 @@
 
 async function openAndMark(urls) {
 	const props = urls.map(u => { active: false, url });
-	let tab = await chrome.tabs.create(prop);
-	for prop in props {
+	let tab = await chrome.tabs.create({ active: false });
+	for (const prop in props) {
+		await chrome.tabs.update(tab.id, prop);
 		const resp = await chrome.tabs.sendMessage(tab.id, null);
 		if (resp === true)
-			tab = chrome.tabs.create(prop);
+			tab = await chrome.tabs.create(prop);
 	}
 }
 
-runtime.onMessage.addEventListener((urls) => {
-	openAndMark(urls).then(());
+chrome.runtime.onMessage.addListener((urls) => {
+	openAndMark(urls);
 });
+
