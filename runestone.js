@@ -1,17 +1,36 @@
 // open as little tabs as possible.
 
 async function openAndMark(urls) {
-	const props = urls.map(u => { active: false, url });
+	chrome.runtime.onMessage.removeListener(openAndMark);
+	const props = urls.map(url => { return { active: false, url } });
 	let tab = await chrome.tabs.create({ active: false });
-	for (const prop in props) {
-		await chrome.tabs.update(tab.id, prop);
-		const resp = await chrome.tabs.sendMessage(tab.id, null);
-		if (resp === true)
-			tab = await chrome.tabs.create(prop);
+	for (const prop of props) {
+		console.log(prop);
+		await chrome.tabs.update(tab.id, prop, async wait => {
+			const block = new Promise(resolve => {
+				const listener = request => {
+					chrome.runtime.onMessage.removeListener(listener);
+					if (request === false)
+						tab = chrome.tabs.create({ active: false });
+					resolve(request);
+				}
+				chrome.runtime.onMessage.addListener(listener);
+			});
+			await block;
+		});
+
+	/*
+		await chrome.scripting.executeScript({ target: { tabId: tab.id }, func: () => {
+			const button = document.getElementById("completionButton");
+			if (button) {
+		    	button.click();
+			}
+			chrome.
+		}});
+		*/
+		// await chrome.tabs.remove(tab.id);
 	}
+	chrome.runtime.onMessage.addListener(openAndMark);
 }
 
-chrome.runtime.onMessage.addListener((urls) => {
-	openAndMark(urls);
-});
-
+chrome.runtime.onMessage.addListener(openAndMark);

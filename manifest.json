@@ -8,9 +8,14 @@
     },
     "content_scripts": [{
         "matches": ["https://runestone.academy/assignment/student/doAssignment*"],
-        "js": ["content.js"]
+        "js": ["main_content.js"]
+    },
+    {
+        "matches": ["https://runestone.academy/ns/books/published/CSC110PythonASY2324/files/*"],
+        "js": ["page_content.js"]
     }],
-    "permissions": [
-        "tabs"
-    ]
+    "host_permissions": [
+        "https://runestone.academy/ns/books/published/CSC110PythonASY2324/*"
+    ],
+    "permissions": ["scripting", "tabs"]
 }
