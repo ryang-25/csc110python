@@ -13,7 +13,7 @@ def main():
     operators = ["+","-","*","//","/","%"] # calculator operators
     expressions = [f"{a} {op} {b}" for op in operators] # create arithmetic expressions
     for expr in expressions:
-        print(f"{expr} =", eval(expr)) # print expression and evaluate the result
+        print(expr, "=", eval(expr)) # print expression and evaluate the result
 
 if __name__ == "__main__":
     main()
