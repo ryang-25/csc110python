@@ -33,11 +33,8 @@ def read_pixels(file):
 def is_green(pixel):
   red_distance = pixel[1] - pixel[0]
   blue_distance = pixel[1] - pixel[2]
-  out = False
   # if green is greater than red and blue by 20 we assume it to be green.
-  if red_distance >= 20 and blue_distance >= 20:
-    out = True
-  return out
+  return red_distance >= 20 and blue_distance >= 20:
 
 def output_file(file, x, y, pixels):
   # write headers
