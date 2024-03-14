@@ -13,6 +13,7 @@ def print_in(x):
     return ret
 
 def decryptPixel1(r,g,b):
+  """ Sets all values to the red value multiplied by 10. """
   r = g = b = r*10
   return (r,g,b)
 def decryptPixel2(r,g,b):
@@ -21,12 +22,12 @@ def decryptPixel2(r,g,b):
   b *= 20
   return (r,g,b)
 def decryptPixel3(r,g,b):
+  """ Less branches. Multiplies by 16 unconditionally and only sets all to 255
+      if it overflows a byte. """
   b *= 16
   if b >= 256:
     r = g = b = 255
   return (r,g,b)
-def decryptPixel3(r,g,b):
-  return None
 def decryptPixel4(r,g,b):
   return None
 def decryptPixel5(r,g,b):
@@ -51,8 +52,8 @@ def main():
   # why use an if statement if you have first class functions?
   # just use the index you get
   algorithms = [decryptPixel1, decryptPixel2, decryptPixel3, decryptPixel4, decryptPixel5]
-  for i in range(len(pixels)):
-    pixels[i] = algorithms[algorithm-1](*pixels[i])
+  # yet another list comprehension (i'm allergic to indexing)
+  pixels = [algorithms[algorithm-1](*pixel) for pixel in pixels]
 
   # output
   # strip the extension
