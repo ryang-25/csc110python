@@ -9,7 +9,7 @@ import re
 
 def read_comment(file):
   line = "#"
-  while len(line) and line[0] != "#":
+  while len(line) and line[0] == "#":
     line = file.readline()
   return line
 
@@ -27,7 +27,7 @@ def read_pixels(file):
     r = int(lines[i])
     g = int(lines[i+1])
     b = int(lines[i+2])
-    pixels.append([r,g,b])
+    pixels.append((r,g,b))
   return pixels
 
 def is_green(pixel):
@@ -70,4 +70,5 @@ def main():
   gssm.close()
   out.close()
 
-main()
+if __name__ == '__main__':
+  main()
