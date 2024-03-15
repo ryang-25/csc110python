@@ -8,33 +8,42 @@
 import re
 
 def read_comment(file):
-  line = "#"
-  while len(line) and line[0] == "#":
-    line = file.readline()
+  line = ""
+  while len(line) == 0:
+    line = file.readline().split("#")[0]
   return line
 
 def read_dimensions(file):
-  assert(file.readline()[:-1] == "P3")
-  line = read_comment(file)
-  return [int(x) for x in re.findall(r"\d+", line)]
+  assert file.readline()[:-1] == "P3"
+  dimensions = []
+  while len(dimensions) < 2:
+    line = read_comment(file)
+    # this isn't entirely within spec since if the max pixel is on the same line we'll miss it
+    # but i don't want to build a whole parser...
+    dimensions = dimensions + [int(x) for x in re.findall(r"\d+", line)]
+  return dimensions
 
 def read_pixels(file):
   max_pixel = int(file.readline()) # unused!
-  pixels = []
-  raw_pixels = [l for l in file.readlines() if l[0] != "#"]
+  raw_pixels = [l for l in file.readlines() if len(l.split("#")[0]) != 0]
   lines = "".join(raw_pixels).split() # remove whitespace!
   for i in range(0, len(lines), 3):
     r = int(lines[i])
     g = int(lines[i+1])
     b = int(lines[i+2])
-    pixels.append((r,g,b))
-  return pixels
+    yield (r,g,b)
 
 def is_green(pixel):
   red_distance = pixel[1] - pixel[0]
   blue_distance = pixel[1] - pixel[2]
   # if green is greater than red and blue by 20 we assume it to be green.
-  return red_distance >= 20 and blue_distance >= 20:
+  return red_distance >= 20 and blue_distance >= 20
+
+def substitute_green(dinos, gssm):
+  for dino, gssm in zip(dinos, gssm):
+    if is_green(dino):
+      dino = gssm
+    yield dino
 
 def output_file(file, x, y, pixels):
   # write headers
@@ -55,13 +64,11 @@ def main():
   assert dimensions == read_dimensions(gssm)
   gssms = read_pixels(gssm)
   dinos = read_pixels(dino)
-  for i in range(len(dinos)):
-    if is_green(dinos[i]):
-      dinos[i] = gssms[i]
+  mixed = substitute_green(dinos, gssms)
 
   OUT = input("output file name: ")
   out = open(OUT, "a")
-  output_file(out, dimensions[0], dimensions[1], dinos)
+  output_file(out, *dimensions, mixed)
 
   dino.close()
   gssm.close()
