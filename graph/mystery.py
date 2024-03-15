@@ -27,14 +27,14 @@ def decryptPixel3(r,g,b):
   """ Less branches. Multiplies by 16 unconditionally and only sets all to 255
       if it overflows a byte. """
   b *= 16
-  if b >= BYTE_MAX+1:
+  if b > BYTE_MAX:
     r = g = b = BYTE_MAX
   return (r,g,b)
 def decryptPixel4(r,g,b):
-  """ Chinese remainder theorem decryption. For all coprime numbers we just need
-      to find integer multiples that add up to 1. For 3 and 17, 3(6) - 17(-1) =
-      1. Then, for any a % 3, b % 17, you will discover a*-17 + b*18 is
-      congruent to both."""
+  """ Chinese remainder theorem. For all coprime numbers we just need to find
+      integer multiples that add up to 1. For 3 and 17, 3(6) - 17(-1) = 1. Then,
+      for any a % 3, b % 17, you will discover a*-17 + b*18 is congruent to
+      both. """
   # for all x:
   # a - x = b
   # x = a - b
@@ -50,14 +50,12 @@ def decryptPixel4(r,g,b):
   L = 3*17*1
 
   # m is an integer % 51.
-  m = (r*J + b*I)
+  m = r*J + b*I
   r = g = b = (m*K + g*L) % BYTE_MAX
   return (r,g,b)
 def decryptPixel5(r,g,b):
-  """
-    Decrypts a pixel with data located in the 4 low bits. Shifts by 4 and
-    masks by 255 very quickly instead of a contrived string manipulation
-  """
+  """ Decrypts a pixel with data located in the 4 low bits. Shifts by 4 and
+      masks by 255 very quickly instead of a contrived string manipulation """
   maskShift = lambda n : n << 4 & BYTE_MAX
   return (maskShift(r), maskShift(g), maskShift(b))
 
