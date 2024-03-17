@@ -11,11 +11,11 @@
         "js": ["main_content.js"]
     },
     {
-        "matches": ["https://runestone.academy/ns/books/published/CSC110PythonASY2324/files/*"],
+        "matches": ["https://runestone.academy/ns/books/published/CSC110PythonASY2324/*"],
         "js": ["page_content.js"]
     }],
     "host_permissions": [
         "https://runestone.academy/ns/books/published/CSC110PythonASY2324/*"
     ],
-    "permissions": ["scripting", "tabs"]
+    "permissions": ["tabs"]
 }
