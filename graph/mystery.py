@@ -1,15 +1,19 @@
 # mystery.py
 # Roland Yang
-# N/N/24
+# 3/18/24
 # On my honor I have neither given nor received unauthorized aid on this
 # assignment
 
 import re
-import graphics
-from graphics import *
-# from graphics import GraphWin, Image, Point
 
 # initialize
+
+# whether or not to use graphics.py
+USE_GRAPHICS = False
+if USE_GRAPHICS:
+  from graphics import GraphWin, Image, Point
+
+BYTE_MAX = 255
 
 def read_comment(file):
   line = ""
@@ -47,23 +51,17 @@ def output_file(file, x, y, pixels):
   for pixel in pixels:
     file.write("{} {} {}\n".format(pixel[0], pixel[1], pixel[2]))
 
-# output the binary
+# output the binary file
 def output_binary(file, x, y, pixels):
   # write headers
   file.write("P6\n".encode())
   file.write("# Roland Yang\n".encode())
-  # apparently the grader doesn't like f-strings!!
   file.write("{} {}\n".format(x,y).encode())
   file.write("255\n".encode())
   for pixel in pixels:
-    order = "little"
-    red = pixel[0].to_bytes(1, order)
-    green = pixel[1].to_bytes(1, order)
-    blue = pixel[2].to_bytes(1, order)
-    out = red + green + blue
+    # convert each pixel to binary
+    out = b"".join([sub.to_bytes(1, "little") for sub in pixel])
     file.write(out)
-
-BYTE_MAX = 255
 
 def print_in(x):
     """ Accept input and print out the input to the terminal with a newline. """
@@ -83,6 +81,7 @@ def decryptA02(r,g,b):
 def decryptA03(r,g,b):
   """ Less branches. Multiplies by 16 unconditionally and only sets all to 255
       if it overflows a byte. """
+  r = g = 0
   b *= 16
   if b > BYTE_MAX:
     r = g = b = BYTE_MAX
@@ -116,38 +115,46 @@ def decryptA05(r,g,b):
   maskShift = lambda n : n << 4 & BYTE_MAX
   return (maskShift(r), maskShift(g), maskShift(b))
 
+
 def main():
   # input
-  # filename = input()
-  # algorithm_choice = int(input())
-  # file = open(filename, "r")
-  # dimensions = read_dimensions(file)
-  # pixels = read_pixels(file)
+  filename = input()
+  algorithm_choice = int(input())
+  file = open(filename, "r")
+  width, height = read_dimensions(file)
+  pixels = read_pixels(file)
 
-  # # compute
+  # process
 
-  # # why use an if statement if you have first class functions?
-  # # just use the index you get
-  # algorithms = [decryptA01, decryptA02, decryptA03, decryptA04, decryptA05]
-  # algorithm = algorithms[algorithm_choice-1]
+  # why use an if statement if you have first class functions?
+  # just use the index you get
+  algorithms = [decryptA01, decryptA02, decryptA03, decryptA04, decryptA05]
+  algorithm = algorithms[algorithm_choice-1]
   # # yet another comprehension (i'm allergic to indexing)
-  # pixels = (algorithm(*pixel) for pixel in pixels)
+  pixels = (algorithm(*pixel) for pixel in pixels)
 
-  # # output
-  # # strip the extension
-  # filename = filename[:-4]
-  # outname = "{}_OutA0{}.ppm".format(filename, algorithm_choice)
-  #out = open(outname, "x")
-  #out = open(outname, "xb")
-  #output_file(out, dimensions[0], dimensions[1], pixels)
-  #output_binary(out, dimensions[0], dimensions[1], pixels)
-  win = GraphWin("hi", 800, 450)
-  c = Image(Point(5,5), "mystery1_OutA01.ppm")
-  c.draw(win)
-  win.getMouse()
+  # output
+  # strip the extension
+  filename = filename[:-4]
+  outname = "{}_OutA0{}.ppm".format(filename, algorithm_choice)
 
-  # lazy io!
-  file.close()
+  out = open(outname, "xb" if USE_GRAPHICS else "x")
+  if USE_GRAPHICS:
+    output_binary(out, width, height, pixels)
+  else:
+    output_file(out, width, height, pixels)
   out.close()
 
-main()
+  if USE_GRAPHICS:
+    win = GraphWin("image", width, height)
+    img = Image(Point(width//2, height//2), outname)
+    img.draw(win)
+    win.getMouse()
+    win.close()
+
+  # terminate
+  # lazy io!
+  file.close()
+
+if __name__ == "__main__":
+  main()
