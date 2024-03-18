@@ -19,7 +19,6 @@ async function openAndMark(activities) {
         if (!response)
             tab = await chrome.tabs.create({ active: false });
     }
-    return true;
 }
  
 chrome.runtime.onMessage.addListener(async message => {
