@@ -20,3 +20,9 @@ the binary P6 that graphics.py could read. The only thing that took a little
 time was the fourth one and that was because it was math intensive, but it still
 only took about half an hour or so. I also didn't want to use a string to
 manipulate bits, so that was really easy.
+
+The first image is the eiffel tower
+The second image is the statue of liberty
+The third is the pineapple fountain
+The fourth is the school
+The fifth is some scientists giving us the thumbs up

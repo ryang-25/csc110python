@@ -37,13 +37,14 @@ def main():
 
   # output
   print(isbn) # satisfy submitty
+  print()
 
   print("RESULT:\n")
-  print(f"  Check sum: {weighted}\n")
-  print(f"  Check digit: {check_digit}\n")
-  print(f"  ISBN check digit: {isbn_check_digit}\n")
+  print("  Check sum: {}\n".format(weighted))
+  print("  Check digit: {}\n".format(check_digit))
+  print("  ISBN check digit: {}\n".format(isbn_check_digit))
 
-  print(f"OUTCOME: {outcome}\n")
+  print("OUTCOME: {}\n".format(outcome))
   print("END RUN.")
 
   # terminate
