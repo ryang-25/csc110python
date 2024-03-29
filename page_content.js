@@ -1,5 +1,16 @@
 // the goal is to just call the api eventually
 
+function options(body) {
+    return {
+        body: JSON.stringify(body),
+        headers: {
+            Accept: "application/json",
+            "Accept-Language": "en-US,en;q=0.9",
+            "Content-Type": "application/json; charset=utf-8",
+        },
+        method: "POST"
+    };
+
 function bookEvent(div_id, answer) {
     let body = {
         // multiple choice
@@ -13,16 +24,8 @@ function bookEvent(div_id, answer) {
         timezoneoffset: 4,
         percent: 1
     };
-    let options = {
-        body: JSON.stringify(body),
-        headers: {
-            Accept: "application/json",
-            "Accept-Language": "en-US,en;q=0.9",
-            "Content-Type": "application/json; charset=utf-8",
-        },
-        method: "POST"
-    };
-    return fetch("https://runestone.academy/ns/logger/bookevent", options);
+    return fetch("https://runestone.academy/ns/logger/bookevent",
+        options(body));
 }
 
 // given an answer list element, find the right answer and submit
@@ -47,16 +50,7 @@ function submitCode(div_id) {
         timezoneoffset: 4,
         to_save: "False"
     };
-    let options = {
-        body: JSON.stringify(body),
-        headers: {
-            Accept: "application/json",
-            "Accept-Language": "en-US,en;q=0.9",
-            "Content-Type": "application/json; charset=utf-8",
-        },
-        method: "POST"
-    };
-    return fetch("https://runestone.academy/ns/logger/runlog", options)
+    return fetch("https://runestone.academy/ns/logger/runlog", options(body));
 }
 
 function test() {
