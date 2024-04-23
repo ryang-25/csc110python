@@ -129,12 +129,19 @@ def main():
 
   # process
 
-  # why use an if statement if you have first class functions?
   # just use the index you get
-  algorithms = [decryptA01, decryptA02, decryptA03, decryptA04, decryptA05]
-  algorithm = algorithms[algorithm_choice-1]
-  # # yet another comprehension (i'm allergic to indexing)
-  pixels = (algorithm(*pixel) for pixel in original_pixels)
+  # yet another comprehension (i'm allergic to indexing)
+  pixels = []
+  if algorithm_choice == 1:
+    pixels = (decryptA01(*pixel) for pixel in original_pixels)
+  elif algorithm_choice == 2:
+    pixels = (decryptA02(*pixel) for pixel in original_pixels)
+  elif algorithm_choice == 3:
+    pixels = (decryptA03(*pixel) for pixel in original_pixels)
+  elif algorithm_choice == 4:
+    pixels = (decryptA04(*pixel) for pixel in original_pixels)
+  elif algorithm_choice == 5:
+    pixels = (decryptA05(*pixel) for pixel in original_pixels)
 
   # output
   # strip the extension
