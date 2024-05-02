@@ -1,41 +1,5 @@
 // the goal is to just call the api eventually
 
-function options(body) {
-    return {
-        body: JSON.stringify(body),
-        headers: {
-            Accept: "application/json",
-            "Accept-Language": "en-US,en;q=0.9",
-            "Content-Type": "application/json; charset=utf-8",
-        },
-        method: "POST"
-    };
-
-function bookEvent(div_id, answer) {
-    let body = {
-        // multiple choice
-        event: "mChoice",
-        act: `answer:${answer}:correct`,
-        answer,
-        correct: "T",
-        div_id,
-        course_name: "CSC110PythonASY2324",
-        clientLoginStatus: true,
-        timezoneoffset: 4,
-        percent: 1
-    };
-    return fetch("https://runestone.academy/ns/logger/bookevent",
-        options(body));
-}
-
-// given an answer list element, find the right answer and submit
-function solveAnswer(answer_list) {
-    let answer = "";
-    for (let i = 0; i < answer_list.children.length; i++)
-        if (answer.getAttribute("data-correct"))
-            answer = String(i);
-    return bookEvent(answer_list.id, answer)
-}
 
 function submitCode(div_id) {
     let body = {

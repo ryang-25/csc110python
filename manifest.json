@@ -11,6 +11,11 @@
         "js": ["main_content.js"]
     },
     {
+        "matches": ["https://runestone.academy/assignment/student/doAssignment*"],
+        "js": ["main_answer.js"],
+        "run_at": "document_end"
+    },
+    {
         "matches": ["https://runestone.academy/ns/books/published/CSC110PythonASY2324/*"],
         "js": ["page_content.js"]
     }],
