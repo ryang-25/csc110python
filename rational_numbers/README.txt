@@ -14,4 +14,4 @@ RESOURCES: N/A
 TUTORS: N/A
 COMMENTS: The answer key is wrong!! and changing the denominator to one makes a
 lot of math wrong!!
-REFLECTION: Should fail with assertion if denominator is zero...
+REFLECTION: Should fail with assertion if denominator is zero... Also the 

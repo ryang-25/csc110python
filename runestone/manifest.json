@@ -1,0 +1,27 @@
+{
+    "manifest_version": 3,
+    "name": "Runestone",
+    "version": "0.0.1",
+    "description": "a extension to click all the things",
+    "background": {
+        "service_worker": "runestone.js"
+    },
+    "content_scripts": [{
+        "matches": ["https://runestone.academy/assignment/student/doAssignment*"],
+        "js": ["main_content.js"]
+    },
+    {
+        "matches": ["https://runestone.academy/assignment/student/doAssignment*"],
+        "js": ["api.js", "content.js"],
+        "run_at": "document_end"
+    },
+    {
+        "matches": ["https://runestone.academy/ns/books/published/CSC110PythonASY2324/*"],
+        "js": ["api.js", "content.js"],
+        "run_at": "document_end"
+    }],
+    "host_permissions": [
+        "https://runestone.academy/ns/books/published/CSC110PythonASY2324/*"
+    ],
+    "permissions": ["tabs"]
+}

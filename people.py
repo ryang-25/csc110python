@@ -1,3 +1,9 @@
+# people.py
+# Roland Yang
+# 5/6/24
+# On my honor I have neither given nor received unauthorized aid on this
+# assignment
+
 class People():
     def __init__(self, name, age, ssn):
         self.myName = name
@@ -30,7 +36,7 @@ class Student(People):
         super.__init__(self, name, age, ssn)
         self.myGpa = gpa
         self.myGLevel = gLevel
-        self.myGajor = major
+        self.myMajor = major
 
     def getGpa(self):
         return self.myGpa
@@ -38,9 +44,5 @@ class Student(People):
     def getGLevel(self):
         return self.myGLevel
 
-    def getGpa(self):
-        return self.myGpa
-
-
-print("Akhil is better at 8ball")
-print("I like yellow people")
+    def getMajor(self):
+        return self.myMajor
