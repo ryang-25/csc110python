@@ -24,7 +24,6 @@ function bookEvent(div_id, event) {
         div_id,
         timezoneoffset: 4
     }
-    console.log({...common, ...event});
     return fetch_options("https://runestone.academy/ns/logger/bookevent",
         {...common, ...event})
 }
@@ -73,7 +72,6 @@ async function mChoiceCorrect() {
     for (let node of nodes.values()) {
         let answers = [...node.querySelectorAll("[data-correct]")]
             .map(answerToNum);
-        // window.alert(answers);
         await mChoice(node.id, answers.toString());
     }
 }
@@ -81,7 +79,6 @@ async function mChoiceCorrect() {
 // clicks all activecode boxes.
 async function activeCode() {
     let nodes = document.querySelectorAll('[data-component="activecode"]');
-    for (let node of nodes.values()) {
+    for (let node of nodes.values())
         await runLog(node.id);
-    }
 }

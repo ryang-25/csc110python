@@ -18,7 +18,7 @@ async function openAndMark(urls) {
             chrome.runtime.onMessage.addListener(listen);
         });
         let response = await chrome.tabs.sendMessage(tab.id, null);
-        console.log(respone);
+        console.log(response);
         if (!response)
             tab = await chrome.tabs.create({ active: false });
     }
