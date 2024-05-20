@@ -9,7 +9,7 @@ assignment
 # whether or not to use graphics.py
 USE_GRAPHICS = False
 if USE_GRAPHICS:
-  from graphics import GraphWin, Image, Point, Rectangle, Text
+  from graphics import GraphWin, Image, Line, Point, Rectangle, Text
 
 from math import floor
 from asciibars import plot
@@ -69,20 +69,36 @@ def draw_window(state, total, percentages):
     Draw graphics window.
     """
     win = GraphWin("gerrymandering", WIDTH, HEIGHT)
-    state_t = Text(Point(0,0), state)
-    voters_t = str(total) + " eligible voters"
+    win.setBackground("white")
+
+    state_t = Text(Point(len(state)*4,10), state)
+    voters = str(total) + " eligible voters"
+    voters_t = Text(Point(WIDTH-len(voters)*3.7, 10), voters)
+
+    state_t.draw(win)
+    voters_t.draw(win)
+
+    dash = Line(Point(0, 20), Point(WIDTH, 20))
+    dash.draw(win)
+
+    bar = Line(Point(WIDTH/2, 0), Point(WIDTH/2, HEIGHT))
+    bar.draw(win)
 
     # starting y coordinate
-    y = 0
+    y = 25
     for percent in percentages:
-        x = floor(percent*WIDTH)
-        r1 = rectangle(Point(0, y), Point(x, y+20))
+        x = int(percent*WIDTH/100)
+        r1 = Rectangle(Point(0, y), Point(x, y+20))
+        r1.setFill("blue")
         r1.draw(win)
         r2 = Rectangle(Point(x, y), Point(WIDTH, y+20))
+        r2.setFill("red")
+        r2.draw(win)
         y += 25
 
-    win.getMouse()
+    win.getKey()
     win.close()
+
 
 def main():
     # Initialize
